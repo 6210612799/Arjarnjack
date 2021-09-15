@@ -9,5 +9,10 @@
         <li>Email: {{ request.user.email }}</li>
     </ul>
 
+    <a href="{% url 'users:index' %}">aLL Courses !</a>
+    <br>
+    <br>
+    <br>
+    
     <a href="{% url 'realuser:logout' %}">Log out</a>
 {% endblock %}

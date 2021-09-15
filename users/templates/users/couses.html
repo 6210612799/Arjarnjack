@@ -2,21 +2,28 @@
 
 {% block body %}
     <h1>
-        COUSES  {{ couses.id }}
+        COUrSES  {{ couses.id }}
     </h1>
     <u1>
         <li>subject : {{ couses.subject}}</li>
         <li>Semmemster : {{couses.term}}</li>
-        <li>Student : {{couses.num_student}}</li>
+        <li>Student : {{ keekon }} / {{couses.num_student}}</li>
+        <li>Status : {% if couses.status %}
+                    Avalible
+                    {%else%}
+                    Unvalible
+                    {% endif %}
+        </li>
         
         
-        
+   
     </u1>
+    {% if request.user.is_superuser %}
     <h3> Student: </h3>
     <ul>
-        {% for student in nisitall %}
+        {% for student in portai %}
         <li>
-            {{ student }}
+            {{ student.first_name }} {{ student.last_name }}
         </li>
         {% empty %}
         <li>
@@ -24,18 +31,32 @@
         </li>
         {% endfor %}
     </ul>
-    <h3> Add Student</h3>
-    <form action ="{% url 'users:book' couses.id %}" method="post">
-        {% csrf_token %}
-        <select name="student">
-            {% for student in non_student %}
-            <option value="{{ student.id }}">{{ student }}</option>
-            {% endfor %}
-        </select>
-        <button type="submit" >Submit</button>
-    </form>
-    <h1>  </h1>
-    <h1>  </h1>
-    <h1>  </h1>
+    
+    {% else %}
+   
+    {% endif %}
+    
+    {% if request.user not in portai %}
+        {% if couses.status %}
+        <p><a href="{% url 'users:book' couses.id %}">Register</a></h3>
+        {% else %}
+        
+        {% endif %}
+    {% else %}
+    <h1>
+        aLRadY rEgisTer </h1>
+    <br>
+    <p><a href="{% url 'users:debook' couses.id %}">de Register</a>
+    
+    {% endif %}
+    
+    <br>
+    <br>
+    <br>
     <li><a href = "{% url 'users:index' %}">Back to menu</a></li>
+    {% if request.user.is_superuser %}
+    <li><a href="{% url 'users:admun' couses.id %}">Admin CoMand</a></li>
+    {% else %}
+   
+    {% endif %}
 {% endblock %}
