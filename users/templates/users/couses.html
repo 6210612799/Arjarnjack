@@ -1,0 +1,41 @@
+{% extends "users/layout.html" %}
+
+{% block body %}
+    <h1>
+        COUSES  {{ couses.id }}
+    </h1>
+    <u1>
+        <li>subject : {{ couses.subject}}</li>
+        <li>Semmemster : {{couses.term}}</li>
+        <li>Student : {{couses.num_student}}</li>
+        
+        
+        
+    </u1>
+    <h3> Student: </h3>
+    <ul>
+        {% for student in nisitall %}
+        <li>
+            {{ student }}
+        </li>
+        {% empty %}
+        <li>
+            No student
+        </li>
+        {% endfor %}
+    </ul>
+    <h3> Add Student</h3>
+    <form action ="{% url 'users:book' couses.id %}" method="post">
+        {% csrf_token %}
+        <select name="student">
+            {% for student in non_student %}
+            <option value="{{ student.id }}">{{ student }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" >Submit</button>
+    </form>
+    <h1>  </h1>
+    <h1>  </h1>
+    <h1>  </h1>
+    <li><a href = "{% url 'users:index' %}">Back to menu</a></li>
+{% endblock %}

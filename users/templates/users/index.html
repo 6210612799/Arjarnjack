@@ -1,0 +1,17 @@
+{% extends "users/layout.html" %}
+
+{% block body %}
+    <h1>
+        Subject List!
+    </h1>
+    <ul>
+    {% for couses in couses %}
+        <li>
+
+            
+            <a href = "{% url 'users:couses' couses.id %}">{{ couses }}</a>
+        </li>
+    {% endfor %}
+    
+    </ul>
+{% endblock %}
