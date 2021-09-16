@@ -18,5 +18,5 @@ class Couses(models.Model):
         return False
 
     def __str__(self):
-        return f"{self.id} :subject {self.subject} term {self.term} Couses ID {self.couseid} student {self.num_student} year {self.year}"
+        return f"{self.id} :Subject {self.subject} | Semmeter {self.term} | Couses ID {self.couseid} | Student {self.num_student} | Year {self.year}"
 
